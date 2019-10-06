@@ -26,6 +26,11 @@
           {{scope.row.final_price}}€
         </template>
       </el-table-column>
+      <el-table-column label="Status" width="110" align="center">
+        <template slot-scope="scope">
+          {{scope.row.status}}
+        </template>
+      </el-table-column>
        <el-table-column label="Actions" width="110" align="center">
         <template slot-scope="scope">
            <router-link :to="{ name: 'OrderDetails', params: {id: scope.row._id} }">
