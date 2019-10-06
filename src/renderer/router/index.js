@@ -38,17 +38,25 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/example',
+    path: '/orders',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    redirect: '/orders/list',
+    name: 'Orders',
+    meta: { title: 'Orders', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/orders/index'),
+        meta: { title: 'List', icon: 'table' }
+      },
+      {
+        path: 'orders/:id(\\d+)',
+        component: () => import('@/views/orders/show'),
+        name: 'OrderDetails',
+        meta: { title: 'Order details', noCache: true },
+        hidden: true,
+        props: true
       },
       {
         path: 'tree',
