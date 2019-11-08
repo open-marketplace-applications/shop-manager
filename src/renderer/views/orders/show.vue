@@ -24,7 +24,7 @@ export default {
     fetchData() {
       this.listLoading = true
       console.log('ididid', this.$route.params.id)
-      getOrder(this.$route.params.id).then(response => {
+      getOrder(this.$route.params.id, this.$store.getters.token).then(response => {
         console.log('response', response)
         this.order = response
       })

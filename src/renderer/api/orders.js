@@ -1,17 +1,18 @@
 import request from '@/utils/request'
 
-export function getList(params) {
+export function getList(params, token) {
   return request({
     url: '/orders',
     method: 'get',
+    headers: { authorization: token },
     params
   })
 }
 
-export function getOrder(id) {
-  console.log('getOrder', id)
+export function getOrder(id, token) {
   return request({
     url: '/orders/' + id,
-    method: 'get'
+    method: 'get',
+    headers: { authorization: token }
   })
 }
