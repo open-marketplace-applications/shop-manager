@@ -68,6 +68,19 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/invoices',
+    component: Layout,
+    children: [
+      {
+        path: 'invoices',
+        name: 'Invoices',
+        component: () => import('@/views/invoices/index'),
+        meta: { title: 'Invoices', icon: 'table' }
+      }
+    ]
+  },
+
+  {
     path: '/form',
     component: Layout,
     children: [
