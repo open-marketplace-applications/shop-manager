@@ -25,3 +25,11 @@ export function sendOrders(params, token) {
     headers: { authorization: token }
   })
 }
+
+export function getAmount(params) {
+  console.log('sendOrders')
+  return request({
+    url: '/amount',
+    method: 'get'
+  })
+}
