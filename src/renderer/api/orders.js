@@ -16,3 +16,12 @@ export function getOrder(id, token) {
     headers: { authorization: token }
   })
 }
+
+export function sendOrders(params, token) {
+  console.log('sendOrders')
+  return request({
+    url: '/sendOrders',
+    method: 'get',
+    headers: { authorization: token }
+  })
+}
