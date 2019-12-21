@@ -54,28 +54,32 @@ export default {
 
         // Laufe durch alle Reechnungen durch
         this.list.forEach(invoice => {
-          doc.setFontSize(fontSizes.NormalFontSize)
-          // Hänge eine neue Seite an.
-          doc.addPage()
+          let count = invoice.amount || 1
+          while (count) {
+            doc.setFontSize(fontSizes.NormalFontSize)
+            // Hänge eine neue Seite an.
+            doc.addPage()
 
-          // Anschrift
-          doc.text(`${invoice.first_name} ${invoice.last_name}`, 20, 50)
-          doc.text(`${invoice.address}`, 20, 56)
-          doc.text(`${invoice.zip_code} ${invoice.city}`, 20, 62)
+            // Anschrift
+            doc.text(`${invoice.first_name} ${invoice.last_name}`, 20, 50)
+            doc.text(`${invoice.address}`, 20, 56)
+            doc.text(`${invoice.zip_code} ${invoice.city}`, 20, 62)
 
-          // einfachIOTA Logo
-          var img = new Image()
-          img.src = './' + this.logo
-          doc.addImage(img, 'PNG', 150, 40, 25, 25)
+            // einfachIOTA Logo
+            var img = new Image()
+            img.src = './' + this.logo
+            doc.addImage(img, 'PNG', 150, 40, 25, 25)
 
-          // Anschreiben Text
-          doc.text(`Hallo ${invoice.first_name},`, 20, 120)
-          doc.text(`vielen Dank, dass Du das einfachIOTA Magazin bestellt hast!`, 20, 136)
-          doc.text(`Wir wünschen Dir viel Spaß beim Lesen,`, 20, 142)
-          doc.text(`Dein einfachIOTA Team.`, 20, 154)
+            // Anschreiben Text
+            doc.text(`Hallo ${invoice.first_name},`, 20, 120)
+            doc.text(`vielen Dank, dass Du das einfachIOTA Magazin bestellt hast!`, 20, 136)
+            doc.text(`Wir wünschen Dir viel Spaß beim Lesen,`, 20, 142)
+            doc.text(`Dein einfachIOTA Team.`, 20, 154)
 
-          doc.setFontSize(fontSizes.SmallFontSize)
-          doc.text(`Wir erklären IOTA einfach - www.einfachIOTA.de`, 20, 280)
+            doc.setFontSize(fontSizes.SmallFontSize)
+            doc.text(`Wir erklären IOTA einfach - www.einfachIOTA.de`, 20, 280)
+            count = count - 1
+          }
         })
         // Save rhe PDF
         doc.save(pdfName + '.pdf')
