@@ -61,9 +61,10 @@ export default {
             doc.addPage()
 
             // Anschrift
-            doc.text(`${invoice.first_name} ${invoice.last_name}`, 20, 50)
-            doc.text(`${invoice.address}`, 20, 56)
-            doc.text(`${invoice.zip_code} ${invoice.city}`, 20, 62)
+            doc.text(`${invoice.first_name} ${invoice.last_name}`, 20, 56)
+            doc.text(`${invoice.address}`, 20, 62)
+            doc.text(`${invoice.zip_code} ${invoice.city}`, 20, 68)
+            doc.text(`${invoice.country}`, 20, 74)
 
             // einfachIOTA Logo
             var img = new Image()
