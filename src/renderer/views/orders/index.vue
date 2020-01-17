@@ -1,6 +1,12 @@
 <template>
   <div class="app-container">
-    <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
+    <el-input
+          placeholder="Nachname suchen..."
+          v-model="search"
+          class="search-form">
+          <i slot="prefix" class="el-input__icon el-icon-search"></i>
+    </el-input>
+    <el-table :data="list.filter(data => !search || data.last_name.toLowerCase().includes(search.toLowerCase()))" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
       <el-table-column align="center" label='ID' width="95">
         <template slot-scope="scope">
           {{scope.$index}}
@@ -49,7 +55,8 @@ export default {
   data() {
     return {
       list: null,
-      listLoading: true
+      listLoading: true,
+      search: false
     }
   },
   filters: {
