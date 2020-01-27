@@ -52,29 +52,35 @@ export default {
       const pdfName = 'test'
       var doc = new PDF()
       doc.setFont('open-sans')
-      doc.setFontSize(fontSizes.NormalFontSize)
-      // Hänge eine neue Seite an.
-      doc.addPage()
 
-      // Anschrift
-      doc.text(`${this.order.first_name} ${this.order.last_name}`, 20, 56)
-      doc.text(`${this.order.address}`, 20, 62)
-      doc.text(`${this.order.zip_code} ${this.order.city}`, 20, 68)
-      doc.text(`${this.order.country}`, 20, 74)
+      let count = this.order.amount || 1
+      while (count) {
+        doc.setFontSize(fontSizes.NormalFontSize)
+        // Hänge eine neue Seite an.
+        doc.addPage()
 
-      // einfachIOTA Logo
-      var img = new Image()
-      img.src = './' + this.logo
-      doc.addImage(img, 'PNG', 150, 40, 25, 25)
+        // Anschrift
+        doc.text(`${this.order.first_name} ${this.order.last_name}`, 20, 56)
+        doc.text(`${this.order.address}`, 20, 62)
+        doc.text(`${this.order.zip_code} ${this.order.city}`, 20, 68)
+        doc.text(`${this.order.country}`, 20, 74)
 
-      // Anschreiben Text
-      doc.text(`Hallo ${this.order.first_name},`, 20, 120)
-      doc.text(`vielen Dank, dass Du das einfachIOTA Magazin bestellt hast!`, 20, 136)
-      doc.text(`Wir wünschen Dir viel Spaß beim Lesen,`, 20, 142)
-      doc.text(`Dein einfachIOTA Team.`, 20, 154)
+        // einfachIOTA Logo
+        var img = new Image()
+        img.src = './' + this.logo
+        doc.addImage(img, 'PNG', 150, 40, 25, 25)
 
-      doc.setFontSize(fontSizes.SmallFontSize)
-      doc.text(`Wir erklären IOTA einfach - www.einfachIOTA.de`, 20, 280)
+        // Anschreiben Text
+        doc.text(`Hallo ${this.order.first_name},`, 20, 120)
+        doc.text(`vielen Dank, dass Du das einfachIOTA Magazin bestellt hast!`, 20, 136)
+        doc.text(`Wir wünschen Dir viel Spaß beim Lesen,`, 20, 142)
+        doc.text(`Dein einfachIOTA Team.`, 20, 154)
+
+        doc.setFontSize(fontSizes.SmallFontSize)
+        doc.text(`Wir erklären IOTA einfach - www.einfachIOTA.de`, 20, 280)
+        count = count - 1
+      }
+
       // Save rhe PDF
       doc.save(pdfName + '.pdf')
     }
