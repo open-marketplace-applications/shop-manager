@@ -14,20 +14,32 @@ export function createInvoice(doc, invoice, language) {
 
   // Anschrift
   doc.text(`${invoice.first_name} ${invoice.last_name}`, 20, 56)
-  doc.text(`${invoice.address}`, 20, 62)
-  doc.text(`${invoice.zip_code} ${invoice.city}`, 20, 68)
-  doc.text(`${invoice.country}`, 20, 74)
+  console.log('invoice.address.length', invoice.address.length)
+  if (invoice.address.length <= 30) {
+    doc.text(`${invoice.address}`, 20, 62)
+    doc.text(`${invoice.zip_code} ${invoice.city}`, 20, 68)
+    if (invoice.country.length <= 30) {
+      doc.text(`${invoice.country}`, 20, 74)
+    } else {
+      doc.text(`${invoice.country.substring(0, 30)}`, 20, 74)
+      doc.text(`${invoice.country.substring(30, invoice.country.length)}`, 20, 80)
+    }
+  } else {
+    doc.text(`${invoice.address.substring(0, 30)}`, 20, 62)
+    doc.text(`${invoice.address.substring(30, invoice.address.length)}`, 20, 68)
+    doc.text(`${invoice.zip_code} ${invoice.city}`, 20, 74)
+    if (invoice.country.length <= 30) {
+      doc.text(`${invoice.country}`, 20, 80)
+    } else {
+      doc.text(`${invoice.country.substring(0, 30)}`, 20, 80)
+      doc.text(`${invoice.country.substring(30, invoice.country.length)}`, 20, 86)
+    }
+  }
 
   // einfachIOTA Logo
   var img = new Image()
   img.src = './' + require('@/assets/logo.png')
   doc.addImage(img, 'PNG', 150, 40, 25, 25)
-
-  // Anschreiben Text - DE
-  // doc.text(`Hallo ${invoice.first_name},`, 20, 120)
-  // doc.text(`vielen Dank, dass Du das einfachIOTA Magazin bestellt hast!`, 20, 136)
-  // doc.text(`Wir wünschen Dir viel Spaß beim Lesen,`, 20, 142)
-  // doc.text(`Dein einfachIOTA Team.`, 20, 154)
 
   // Anschreiben Text - EN
   if (language === 'DE') {
